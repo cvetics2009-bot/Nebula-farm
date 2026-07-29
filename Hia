@@ -1,0 +1,220 @@
+local pl=game:GetService("Players").LocalPlayer
+local ch=pl.Character or pl.CharacterAdded:Wait()
+local hrp=ch:WaitForChild("HumanoidRootPart")
+
+local coords={tar=Vector3.new(142.8,59.2,-235.5),tel=Vector3.new(100,820,945),rad=5,del=0.75}
+local st={tp=false,dl=false,en=true}
+
+local xyz=Instance.new("ScreenGui")
+xyz.Parent=pl.PlayerGui
+xyz.ResetOnSpawn=false
+
+local a=Instance.new("Frame")
+a.Parent=xyz
+a.Size=UDim2.new(0,360,0,200)
+a.Position=UDim2.new(0.5,-180,0.5,-100)
+a.BackgroundColor3=Color3.fromRGB(20,20,30)
+a.BackgroundTransparency=0.15
+a.BorderSizePixel=0
+a.ClipsDescendants=true
+a.Active=true
+a.Draggable=true
+a.Visible=true
+
+local b=Instance.new("UICorner")
+b.Parent=a
+b.CornerRadius=UDim.new(0,16)
+
+local c=Instance.new("ImageLabel")
+c.Parent=a
+c.Size=UDim2.new(1,20,1,20)
+c.Position=UDim2.new(0,-10,0,-10)
+c.BackgroundTransparency=1
+c.Image="rbxassetid://13156786126"
+c.ImageColor3=Color3.fromRGB(0,0,0)
+c.ImageTransparency=0.6
+
+local d=Instance.new("Frame")
+d.Parent=a
+d.Size=UDim2.new(1,0,0,45)
+d.Position=UDim2.new(0,0,0,0)
+d.BackgroundColor3=Color3.fromRGB(30,30,45)
+d.BackgroundTransparency=0.3
+d.BorderSizePixel=0
+
+local e=Instance.new("UICorner")
+e.Parent=d
+e.CornerRadius=UDim.new(0,16)
+
+local f=Instance.new("TextLabel")
+f.Parent=d
+f.Size=UDim2.new(0,30,1,0)
+f.Position=UDim2.new(0,10,0,0)
+f.BackgroundTransparency=1
+f.Text="⠿"
+f.TextColor3=Color3.fromRGB(150,150,200)
+f.TextSize=22
+f.Font=Enum.Font.Gotham
+
+local g=Instance.new("TextLabel")
+g.Parent=d
+g.Size=UDim2.new(1,-90,1,0)
+g.Position=UDim2.new(0,45,0,0)
+g.BackgroundTransparency=1
+g.Text="🌟 Телепорт"
+g.TextColor3=Color3.fromRGB(255,255,255)
+g.TextSize=20
+g.Font=Enum.Font.GothamBold
+g.TextXAlignment=Enum.TextXAlignment.Left
+g.TextYAlignment=Enum.TextYAlignment.Center
+
+local h=Instance.new("TextButton")
+h.Parent=d
+h.Size=UDim2.new(0,35,0,35)
+h.Position=UDim2.new(1,-42,0,5)
+h.BackgroundColor3=Color3.fromRGB(255,50,50)
+h.BackgroundTransparency=0.2
+h.BorderSizePixel=0
+h.Text="✕"
+h.TextColor3=Color3.fromRGB(255,255,255)
+h.TextSize=18
+h.Font=Enum.Font.GothamBold
+
+local i=Instance.new("UICorner")
+i.Parent=h
+i.CornerRadius=UDim.new(1,0)
+
+h.MouseEnter:Connect(function()h.BackgroundTransparency=0 h.BackgroundColor3=Color3.fromRGB(255,30,30)end)
+h.MouseLeave:Connect(function()h.BackgroundTransparency=0.2 h.BackgroundColor3=Color3.fromRGB(255,50,50)end)
+h.MouseButton1Click:Connect(function()a.Visible=false end)
+
+local j=Instance.new("Frame")
+j.Parent=a
+j.Size=UDim2.new(0.9,0,0,2)
+j.Position=UDim2.new(0.05,0,0,50)
+j.BackgroundColor3=Color3.fromRGB(100,150,255)
+j.BackgroundTransparency=0.7
+
+local k=Instance.new("TextLabel")
+k.Parent=a
+k.Size=UDim2.new(1,-40,0,30)
+k.Position=UDim2.new(0,20,0,65)
+k.BackgroundTransparency=1
+k.Text="📍 Телепортируйся на 2 этап за монеты"
+k.TextColor3=Color3.fromRGB(180,200,255)
+k.TextSize=14
+k.Font=Enum.Font.Gotham
+k.TextWrapped=true
+
+local m=Instance.new("TextLabel")
+m.Parent=a
+m.Size=UDim2.new(0.6,-20,0,30)
+m.Position=UDim2.new(0,20,0,110)
+m.BackgroundTransparency=1
+m.Text="⏳ Ожидание..."
+m.TextColor3=Color3.fromRGB(255,200,100)
+m.TextSize=14
+m.Font=Enum.Font.GothamBold
+
+local n=Instance.new("TextButton")
+n.Parent=a
+n.Size=UDim2.new(0,100,0,30)
+n.Position=UDim2.new(0.65,0,0,110)
+n.BackgroundColor3=Color3.fromRGB(0,200,100)
+n.BorderSizePixel=0
+n.Text="✅ ВКЛ"
+n.TextColor3=Color3.fromRGB(255,255,255)
+n.TextSize=14
+n.Font=Enum.Font.GothamBold
+
+local o=Instance.new("UICorner")
+o.Parent=n
+o.CornerRadius=UDim.new(1,0)
+
+local function p()
+    st.en=not st.en
+    if st.en then
+        n.BackgroundColor3=Color3.fromRGB(0,200,100)
+        n.Text="✅ ВКЛ"
+        q("⏳ Ожидание...")
+    else
+        n.BackgroundColor3=Color3.fromRGB(200,50,50)
+        n.Text="❌ ВЫКЛ"
+        q("⛔ Выключен")
+    end
+end
+
+n.MouseButton1Click:Connect(p)
+n.MouseEnter:Connect(function()n.BackgroundTransparency=0.2 end)
+n.MouseLeave:Connect(function()n.BackgroundTransparency=0 end)
+
+local r=Instance.new("TextLabel")
+r.Parent=a
+r.Size=UDim2.new(1,-40,0,20)
+r.Position=UDim2.new(0,20,0,175)
+r.BackgroundTransparency=1
+r.Text="✨ @lumunaria"
+r.TextColor3=Color3.fromRGB(150,150,200)
+r.TextSize=12
+r.Font=Enum.Font.Gotham
+r.TextXAlignment=Enum.TextXAlignment.Right
+
+local s=Instance.new("ImageLabel")
+s.Parent=a
+s.Size=UDim2.new(1.2,0,1.2,0)
+s.Position=UDim2.new(-0.1,0,-0.1,0)
+s.BackgroundTransparency=1
+s.Image="rbxassetid://13156786126"
+s.ImageColor3=Color3.fromRGB(100,150,255)
+s.ImageTransparency=0.8
+s.ZIndex=0
+
+local function q(t,c)
+    m.Text=t
+    m.TextColor3=c or Color3.fromRGB(255,200,100)
+end
+
+local function teleportFunc()
+    if st.tp or st.dl or not hrp or not st.en then return end
+    st.dl=true
+    q("⏳ Телепорт...")
+    task.wait(coords.del)
+    if hrp and (hrp.Position-coords.tar).Magnitude<=coords.rad then
+        if st.en then
+            hrp.Position=coords.tel
+            st.tp=true
+            q("✅ УСПЕШНО!")
+        end
+    else
+        q("❌ Отменен")
+    end
+    st.dl=false
+    task.wait(2)
+    st.tp=false
+    if st.en then q("⏳ Ожидание...") else q("⛔ Выключен") end
+end
+
+local function checkPos()
+    if not hrp or st.tp or st.dl or not st.en then return end
+    if(hrp.Position-coords.tar).Magnitude<=coords.rad then teleportFunc() end
+end
+
+game:GetService("RunService").Heartbeat:Connect(checkPos)
+
+pl.CharacterAdded:Connect(function(nc)
+    ch=nc
+    hrp=ch:WaitForChild("HumanoidRootPart")
+    st.tp=false
+    st.dl=false
+    q("🔄 Обновлен")
+    task.wait(2)
+    if st.en then q("⏳ Ожидание...") else q("⛔ Выключен") end
+end)
+
+local uis=game:GetService("UserInputService")
+uis.InputBegan:Connect(function(inp,gp)
+    if gp then return end
+    if inp.KeyCode==Enum.KeyCode.T and inp:IsModifierKeyDown(Enum.KeyCode.LeftControl) then
+        a.Visible=not a.Visible
+    end
+end)
