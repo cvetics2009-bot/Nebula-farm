@@ -1,0 +1,775 @@
+-- ===== МИР 3 - ФАРМ (все маршруты до +25b) =====
+print("🔄 Загрузка Мир 3...")
+
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+local LocalPlayer = Players.LocalPlayer
+
+local Routes = {
+    ["+300m wins"] = {
+        Vector3.new(-1433.5, -159.7, -878.9),
+        Vector3.new(-1431, -157.1, -831.9),
+        Vector3.new(-1429.5, -126, -733),
+        Vector3.new(-1430.1, -69.9, -538.4),
+        Vector3.new(-1481.8, -71.7, -515.8)
+    },
+    ["+500m wins"] = {
+        Vector3.new(-1433.2, -159.7, -877.5),
+        Vector3.new(-1431, -157.6, -833.5),
+        Vector3.new(-1430.4, -125.1, -730.1),
+        Vector3.new(-1430.9, -69.9, -537.4),
+        Vector3.new(-1453.9, -69.9, -492.7),
+        Vector3.new(-1453.9, -58.4, -392.5),
+        Vector3.new(-1453.9, -57.4, -264.7),
+        Vector3.new(-1453.9, -57.4, -186.8),
+        Vector3.new(-1480.8, -59.4, -15.8)
+    },
+    ["+800m wins"] = {
+        Vector3.new(-1434.9, -159.7, -875.9),
+        Vector3.new(-1430.2, -158.8, -837.1),
+        Vector3.new(-1427.6, -125.2, -730.4),
+        Vector3.new(-1427, -69.9, -538.6),
+        Vector3.new(-1455.2, -69.9, -493.3),
+        Vector3.new(-1455.9, -70.4, -444.3),
+        Vector3.new(-1456.7, -58.5, -393),
+        Vector3.new(-1458.4, -57.4, -266.1),
+        Vector3.new(-1456.8, -57.4, -186.8),
+        Vector3.new(-1452.9, -57.6, 7.6),
+        Vector3.new(-1451.4, -48.6, 84.7),
+        Vector3.new(-1451.4, 83, 84.7),
+        Vector3.new(-1475.2, 92.3, 95.5),
+        Vector3.new(-1475.2, 212.8, 95.6),
+        Vector3.new(-1472.1, 214.6, 143.2),
+        Vector3.new(-1469.4, 222.8, 178.5),
+        Vector3.new(-1464.9, 223, 229.5),
+        Vector3.new(-1463.9, 215, 260),
+        Vector3.new(-1480.8, 212.6, 332.1)
+    },
+    ["+1.25b wins"] = {
+        Vector3.new(-1434.1, -159.6, -879),
+        Vector3.new(-1431.8, -157.7, -834.2),
+        Vector3.new(-1430.5, -125.6, -732.2),
+        Vector3.new(-1427.6, -69.8, -540.1),
+        Vector3.new(-1454.8, -69.8, -495.1),
+        Vector3.new(-1454.8, -70.3, -444.5),
+        Vector3.new(-1455.3, -58.9, -395),
+        Vector3.new(-1454.4, -57.5, 4.5),
+        Vector3.new(-1454.5, -55.8, 84.8),
+        Vector3.new(-1454.5, 84.8, 84.8),
+        Vector3.new(-1475, 102.7, 96),
+        Vector3.new(-1475, 212, 96),
+        Vector3.new(-1473.6, 214.7, 141.2),
+        Vector3.new(-1457.4, 222.5, 176.7),
+        Vector3.new(-1455.8, 223.3, 228.9),
+        Vector3.new(-1455.8, 214.7, 270.6),
+        Vector3.new(-1455.8, 214.5, 627.8),
+        Vector3.new(-1455.8, 365.5, 627.8),
+        Vector3.new(-1434.2, 359.7, 490.7),
+        Vector3.new(-1336, 360.8, 494.3),
+        Vector3.new(-1246.3, 328.8, 517.1),
+        Vector3.new(-1236, 323.2, 600.3),
+        Vector3.new(-1220.6, 342.9, 810.9),
+        Vector3.new(-1361.8, 363, 834.8),
+        Vector3.new(-1403.6, 373.5, 724.7),
+        Vector3.new(-1403.6, 545.5, 724.7),
+        Vector3.new(-1431.3, 530.6, 759.6)
+    },
+    ["+2b wins"] = {
+        Vector3.new(-1434.1, -159.6, -879),
+        Vector3.new(-1431.8, -157.7, -834.2),
+        Vector3.new(-1430.5, -125.6, -732.2),
+        Vector3.new(-1427.6, -69.8, -540.1),
+        Vector3.new(-1454.8, -69.8, -495.1),
+        Vector3.new(-1454.8, -70.3, -444.5),
+        Vector3.new(-1455.3, -58.9, -395),
+        Vector3.new(-1454.4, -57.5, 4.5),
+        Vector3.new(-1454.5, -55.8, 84.8),
+        Vector3.new(-1454.5, 84.8, 84.8),
+        Vector3.new(-1475, 102.7, 96),
+        Vector3.new(-1475, 212, 96),
+        Vector3.new(-1473.6, 214.7, 141.2),
+        Vector3.new(-1457.4, 222.5, 176.7),
+        Vector3.new(-1455.8, 223.3, 228.9),
+        Vector3.new(-1455.8, 214.7, 270.6),
+        Vector3.new(-1455.8, 214.5, 627.8),
+        Vector3.new(-1455.8, 365.5, 627.8),
+        Vector3.new(-1434.2, 359.7, 490.7),
+        Vector3.new(-1336, 360.8, 494.3),
+        Vector3.new(-1246.3, 328.8, 517.1),
+        Vector3.new(-1236, 323.2, 600.3),
+        Vector3.new(-1220.6, 342.9, 810.9),
+        Vector3.new(-1361.8, 363, 834.8),
+        Vector3.new(-1403.6, 373.5, 724.7),
+        Vector3.new(-1403.6, 545.5, 724.7),
+        Vector3.new(-1402.1, 532.4, 759.9),
+        Vector3.new(-1636.6, 532.3, 1082.5),
+        Vector3.new(-1402.1, 532.3, 1318.9),
+        Vector3.new(-1431.8, 530.6, 1329.2)
+    },
+    ["+3.5b wins"] = {
+        Vector3.new(-1434.1, -159.6, -879),
+        Vector3.new(-1431.8, -157.7, -834.2),
+        Vector3.new(-1430.5, -125.6, -732.2),
+        Vector3.new(-1427.6, -69.8, -540.1),
+        Vector3.new(-1454.8, -69.8, -495.1),
+        Vector3.new(-1454.8, -70.3, -444.5),
+        Vector3.new(-1455.3, -58.9, -395),
+        Vector3.new(-1454.4, -57.5, 4.5),
+        Vector3.new(-1454.5, -55.8, 84.8),
+        Vector3.new(-1454.5, 84.8, 84.8),
+        Vector3.new(-1475, 102.7, 96),
+        Vector3.new(-1475, 212, 96),
+        Vector3.new(-1473.6, 214.7, 141.2),
+        Vector3.new(-1457.4, 222.5, 176.7),
+        Vector3.new(-1455.8, 223.3, 228.9),
+        Vector3.new(-1455.8, 214.7, 270.6),
+        Vector3.new(-1455.8, 214.5, 627.8),
+        Vector3.new(-1455.8, 365.5, 627.8),
+        Vector3.new(-1434.2, 359.7, 490.7),
+        Vector3.new(-1336, 360.8, 494.3),
+        Vector3.new(-1246.3, 328.8, 517.1),
+        Vector3.new(-1236, 323.2, 600.3),
+        Vector3.new(-1220.6, 342.9, 810.9),
+        Vector3.new(-1361.8, 363, 834.8),
+        Vector3.new(-1403.6, 373.5, 724.7),
+        Vector3.new(-1403.6, 545.5, 724.7),
+        Vector3.new(-1402.1, 532.4, 759.9),
+        Vector3.new(-1636.6, 532.3, 1082.5),
+        Vector3.new(-1402.1, 532.3, 1318.9),
+        Vector3.new(-1467.8, 508.3, 1446.7),
+        Vector3.new(-2034.8, 508.3, 1445.9),
+        Vector3.new(-2054.0, 442.3, 1485.9),
+        Vector3.new(-2063.0, 440.6, 1459.2)
+    },
+    ["+5.5b wins"] = {
+        Vector3.new(-1434.1, -159.6, -879),
+        Vector3.new(-1431.8, -157.7, -834.2),
+        Vector3.new(-1430.5, -125.6, -732.2),
+        Vector3.new(-1427.6, -69.8, -540.1),
+        Vector3.new(-1454.8, -69.8, -495.1),
+        Vector3.new(-1454.8, -70.3, -444.5),
+        Vector3.new(-1455.3, -58.9, -395),
+        Vector3.new(-1454.4, -57.5, 4.5),
+        Vector3.new(-1454.5, -55.8, 84.8),
+        Vector3.new(-1454.5, 84.8, 84.8),
+        Vector3.new(-1475, 102.7, 96),
+        Vector3.new(-1475, 212, 96),
+        Vector3.new(-1473.6, 214.7, 141.2),
+        Vector3.new(-1457.4, 222.5, 176.7),
+        Vector3.new(-1455.8, 223.3, 228.9),
+        Vector3.new(-1455.8, 214.7, 270.6),
+        Vector3.new(-1455.8, 214.5, 627.8),
+        Vector3.new(-1455.8, 365.5, 627.8),
+        Vector3.new(-1434.2, 359.7, 490.7),
+        Vector3.new(-1336, 360.8, 494.3),
+        Vector3.new(-1246.3, 328.8, 517.1),
+        Vector3.new(-1236, 323.2, 600.3),
+        Vector3.new(-1220.6, 342.9, 810.9),
+        Vector3.new(-1361.8, 363, 834.8),
+        Vector3.new(-1403.6, 373.5, 724.7),
+        Vector3.new(-1403.6, 545.5, 724.7),
+        Vector3.new(-1402.1, 532.4, 759.9),
+        Vector3.new(-1636.6, 532.3, 1082.5),
+        Vector3.new(-1402.1, 532.3, 1318.9),
+        Vector3.new(-1467.8, 508.3, 1446.7),
+        Vector3.new(-2034.8, 508.3, 1445.9),
+        Vector3.new(-2054.0, 442.3, 1485.9),
+        Vector3.new(-2165.9, 450.0, 1488.5),
+        Vector3.new(-2266.9, 438.3, 1490.2),
+        Vector3.new(-2441.6, 438.3, 1488.9),
+        Vector3.new(-2548.4, 464.5, 1487.6),
+        Vector3.new(-2660.6, 442.3, 1489.8),
+        Vector3.new(-2726.0, 449.5, 1489.5),
+        Vector3.new(-2861.4, 465.7, 1486.5),
+        Vector3.new(-2936.7, 541.7, 1483.8),
+        Vector3.new(-3012.4, 621.8, 1485.5),
+        Vector3.new(-3056.6, 671.9, 1487.3),
+        Vector3.new(-3218.3, 671.9, 1488.2),
+        Vector3.new(-3217.6, 670.2, 1459.0)
+    },
+    ["+8.5b wins"] = {
+        Vector3.new(-1434.1, -159.6, -879),
+        Vector3.new(-1431.8, -157.7, -834.2),
+        Vector3.new(-1430.5, -125.6, -732.2),
+        Vector3.new(-1427.6, -69.8, -540.1),
+        Vector3.new(-1454.8, -69.8, -495.1),
+        Vector3.new(-1454.8, -70.3, -444.5),
+        Vector3.new(-1455.3, -58.9, -395),
+        Vector3.new(-1454.4, -57.5, 4.5),
+        Vector3.new(-1454.5, -55.8, 84.8),
+        Vector3.new(-1454.5, 84.8, 84.8),
+        Vector3.new(-1475, 102.7, 96),
+        Vector3.new(-1475, 212, 96),
+        Vector3.new(-1473.6, 214.7, 141.2),
+        Vector3.new(-1457.4, 222.5, 176.7),
+        Vector3.new(-1455.8, 223.3, 228.9),
+        Vector3.new(-1455.8, 214.7, 270.6),
+        Vector3.new(-1455.8, 214.5, 627.8),
+        Vector3.new(-1455.8, 365.5, 627.8),
+        Vector3.new(-1434.2, 359.7, 490.7),
+        Vector3.new(-1336, 360.8, 494.3),
+        Vector3.new(-1246.3, 328.8, 517.1),
+        Vector3.new(-1236, 323.2, 600.3),
+        Vector3.new(-1220.6, 342.9, 810.9),
+        Vector3.new(-1361.8, 363, 834.8),
+        Vector3.new(-1403.6, 373.5, 724.7),
+        Vector3.new(-1403.6, 545.5, 724.7),
+        Vector3.new(-1402.1, 532.4, 759.9),
+        Vector3.new(-1636.6, 532.3, 1082.5),
+        Vector3.new(-1402.1, 532.3, 1318.9),
+        Vector3.new(-1467.8, 508.3, 1446.7),
+        Vector3.new(-2034.8, 508.3, 1445.9),
+        Vector3.new(-2054.0, 442.3, 1485.9),
+        Vector3.new(-2165.9, 450.0, 1488.5),
+        Vector3.new(-2266.9, 438.3, 1490.2),
+        Vector3.new(-2441.6, 438.3, 1488.9),
+        Vector3.new(-2548.4, 464.5, 1487.6),
+        Vector3.new(-2660.6, 442.3, 1489.8),
+        Vector3.new(-2726.0, 449.5, 1489.5),
+        Vector3.new(-2861.4, 465.7, 1486.5),
+        Vector3.new(-2936.7, 541.7, 1483.8),
+        Vector3.new(-3012.4, 621.8, 1485.5),
+        Vector3.new(-3056.6, 671.9, 1487.3),
+        Vector3.new(-3218.3, 671.9, 1488.2),
+        Vector3.new(-3242.9, 671.9, 1487.3),
+        Vector3.new(-3659.0, 616.2, 1493.9),
+        Vector3.new(-3657.9, 614.5, 1459.5)
+    },
+    ["+16b wins"] = {
+        Vector3.new(-1434.1, -159.6, -879),
+        Vector3.new(-1431.8, -157.7, -834.2),
+        Vector3.new(-1430.5, -125.6, -732.2),
+        Vector3.new(-1427.6, -69.8, -540.1),
+        Vector3.new(-1454.8, -69.8, -495.1),
+        Vector3.new(-1454.8, -70.3, -444.5),
+        Vector3.new(-1455.3, -58.9, -395),
+        Vector3.new(-1454.4, -57.5, 4.5),
+        Vector3.new(-1454.5, -55.8, 84.8),
+        Vector3.new(-1454.5, 84.8, 84.8),
+        Vector3.new(-1475, 102.7, 96),
+        Vector3.new(-1475, 212, 96),
+        Vector3.new(-1473.6, 214.7, 141.2),
+        Vector3.new(-1457.4, 222.5, 176.7),
+        Vector3.new(-1455.8, 223.3, 228.9),
+        Vector3.new(-1455.8, 214.7, 270.6),
+        Vector3.new(-1455.8, 214.5, 627.8),
+        Vector3.new(-1455.8, 365.5, 627.8),
+        Vector3.new(-1434.2, 359.7, 490.7),
+        Vector3.new(-1336, 360.8, 494.3),
+        Vector3.new(-1246.3, 328.8, 517.1),
+        Vector3.new(-1236, 323.2, 600.3),
+        Vector3.new(-1220.6, 342.9, 810.9),
+        Vector3.new(-1361.8, 363, 834.8),
+        Vector3.new(-1403.6, 373.5, 724.7),
+        Vector3.new(-1403.6, 545.5, 724.7),
+        Vector3.new(-1402.1, 532.4, 759.9),
+        Vector3.new(-1636.6, 532.3, 1082.5),
+        Vector3.new(-1402.1, 532.3, 1318.9),
+        Vector3.new(-1467.8, 508.3, 1446.7),
+        Vector3.new(-2034.8, 508.3, 1445.9),
+        Vector3.new(-2054.0, 442.3, 1485.9),
+        Vector3.new(-2165.9, 450.0, 1488.5),
+        Vector3.new(-2266.9, 438.3, 1490.2),
+        Vector3.new(-2441.6, 438.3, 1488.9),
+        Vector3.new(-2548.4, 464.5, 1487.6),
+        Vector3.new(-2660.6, 442.3, 1489.8),
+        Vector3.new(-2726.0, 449.5, 1489.5),
+        Vector3.new(-2861.4, 465.7, 1486.5),
+        Vector3.new(-2936.7, 541.7, 1483.8),
+        Vector3.new(-3012.4, 621.8, 1485.5),
+        Vector3.new(-3056.6, 671.9, 1487.3),
+        Vector3.new(-3218.3, 671.9, 1488.2),
+        Vector3.new(-3242.9, 671.9, 1487.3),
+        Vector3.new(-3659.0, 616.2, 1493.9),
+        Vector3.new(-4122.6, 616.2, 1488.5),
+        Vector3.new(-4130.6, 614.5, 1458.4)
+    },
+    ["+25b wins"] = {
+        Vector3.new(-1434.1, -159.6, -879),
+        Vector3.new(-1431.8, -157.7, -834.2),
+        Vector3.new(-1430.5, -125.6, -732.2),
+        Vector3.new(-1427.6, -69.8, -540.1),
+        Vector3.new(-1454.8, -69.8, -495.1),
+        Vector3.new(-1454.8, -70.3, -444.5),
+        Vector3.new(-1455.3, -58.9, -395),
+        Vector3.new(-1454.4, -57.5, 4.5),
+        Vector3.new(-1454.5, -55.8, 84.8),
+        Vector3.new(-1454.5, 84.8, 84.8),
+        Vector3.new(-1475, 102.7, 96),
+        Vector3.new(-1475, 212, 96),
+        Vector3.new(-1473.6, 214.7, 141.2),
+        Vector3.new(-1457.4, 222.5, 176.7),
+        Vector3.new(-1455.8, 223.3, 228.9),
+        Vector3.new(-1455.8, 214.7, 270.6),
+        Vector3.new(-1455.8, 214.5, 627.8),
+        Vector3.new(-1455.8, 365.5, 627.8),
+        Vector3.new(-1434.2, 359.7, 490.7),
+        Vector3.new(-1336, 360.8, 494.3),
+        Vector3.new(-1246.3, 328.8, 517.1),
+        Vector3.new(-1236, 323.2, 600.3),
+        Vector3.new(-1220.6, 342.9, 810.9),
+        Vector3.new(-1361.8, 363, 834.8),
+        Vector3.new(-1403.6, 373.5, 724.7),
+        Vector3.new(-1403.6, 545.5, 724.7),
+        Vector3.new(-1402.1, 532.4, 759.9),
+        Vector3.new(-1636.6, 532.3, 1082.5),
+        Vector3.new(-1402.1, 532.3, 1318.9),
+        Vector3.new(-1467.8, 508.3, 1446.7),
+        Vector3.new(-2034.8, 508.3, 1445.9),
+        Vector3.new(-2054.0, 442.3, 1485.9),
+        Vector3.new(-2165.9, 450.0, 1488.5),
+        Vector3.new(-2266.9, 438.3, 1490.2),
+        Vector3.new(-2441.6, 438.3, 1488.9),
+        Vector3.new(-2548.4, 464.5, 1487.6),
+        Vector3.new(-2660.6, 442.3, 1489.8),
+        Vector3.new(-2726.0, 449.5, 1489.5),
+        Vector3.new(-2861.4, 465.7, 1486.5),
+        Vector3.new(-2936.7, 541.7, 1483.8),
+        Vector3.new(-3012.4, 621.8, 1485.5),
+        Vector3.new(-3056.6, 671.9, 1487.3),
+        Vector3.new(-3218.3, 671.9, 1488.2),
+        Vector3.new(-3242.9, 671.9, 1487.3),
+        Vector3.new(-3659.0, 616.2, 1493.9),
+        Vector3.new(-4122.6, 616.2, 1488.5),
+        Vector3.new(-4175.3, 615.2, 1487.4),
+        Vector3.new(-4376.1, 615.2, 1550.5),
+        Vector3.new(-4613.0, 615.0, 1443.1),
+        Vector3.new(-4825.1, 615.1, 1553.8),
+        Vector3.new(-4963.5, 616.2, 1485.3),
+        Vector3.new(-4967.0, 614.5, 1458.2)
+    }
+}
+
+local currentRoute = "+300m wins"
+local currentSpeed = 250
+local autoFarm = false
+local isFrozen = false
+local noClipConnection = nil
+
+-- GUI
+local xyz = Instance.new("ScreenGui")
+xyz.Name = "Farm3World"
+xyz.Parent = game.CoreGui
+xyz.ResetOnSpawn = false
+
+local a = Instance.new("Frame")
+a.Parent = xyz
+a.Size = UDim2.new(0, 380, 0, 250)
+a.Position = UDim2.new(0.5, -190, 0.5, -125)
+a.BackgroundColor3 = Color3.fromRGB(15, 12, 35)
+a.BackgroundTransparency = 0.1
+a.BorderSizePixel = 0
+a.ClipsDescendants = true
+a.Active = true
+a.Draggable = true
+a.Visible = true
+
+local aCorner = Instance.new("UICorner")
+aCorner.Parent = a
+aCorner.CornerRadius = UDim.new(0, 20)
+
+local grad = Instance.new("Frame")
+grad.Parent = a
+grad.Size = UDim2.new(1, 0, 1, 0)
+grad.BackgroundColor3 = Color3.fromRGB(30, 20, 60)
+grad.BackgroundTransparency = 0.3
+grad.BorderSizePixel = 0
+Instance.new("UICorner", grad).CornerRadius = UDim.new(0, 20)
+
+local d = Instance.new("Frame")
+d.Parent = a
+d.Size = UDim2.new(1, 0, 0, 45)
+d.Position = UDim2.new(0, 0, 0, 0)
+d.BackgroundColor3 = Color3.fromRGB(60, 40, 120)
+d.BackgroundTransparency = 0.4
+d.BorderSizePixel = 0
+Instance.new("UICorner", d).CornerRadius = UDim.new(0, 20)
+
+local f = Instance.new("TextLabel")
+f.Parent = d
+f.Size = UDim2.new(0, 30, 1, 0)
+f.Position = UDim2.new(0, 10, 0, 0)
+f.BackgroundTransparency = 1
+f.Text = "🌍"
+f.TextColor3 = Color3.fromRGB(150, 130, 255)
+f.TextSize = 22
+f.Font = Enum.Font.Gotham
+
+local g = Instance.new("TextLabel")
+g.Parent = d
+g.Size = UDim2.new(1, -90, 1, 0)
+g.Position = UDim2.new(0, 45, 0, 0)
+g.BackgroundTransparency = 1
+g.Text = "🌍 Мир 3"
+g.TextColor3 = Color3.fromRGB(220, 210, 255)
+g.TextSize = 18
+g.Font = Enum.Font.GothamBold
+g.TextXAlignment = Enum.TextXAlignment.Left
+g.TextYAlignment = Enum.TextYAlignment.Center
+
+local h = Instance.new("TextButton")
+h.Parent = d
+h.Size = UDim2.new(0, 35, 0, 35)
+h.Position = UDim2.new(1, -42, 0, 5)
+h.BackgroundColor3 = Color3.fromRGB(200, 50, 80)
+h.BackgroundTransparency = 0.2
+h.BorderSizePixel = 0
+h.Text = "✕"
+h.TextColor3 = Color3.fromRGB(255, 255, 255)
+h.TextSize = 18
+h.Font = Enum.Font.GothamBold
+Instance.new("UICorner", h).CornerRadius = UDim.new(1, 0)
+
+h.MouseEnter:Connect(function() h.BackgroundTransparency = 0 h.BackgroundColor3 = Color3.fromRGB(255, 30, 50) end)
+h.MouseLeave:Connect(function() h.BackgroundTransparency = 0.2 h.BackgroundColor3 = Color3.fromRGB(200, 50, 80) end)
+h.MouseButton1Click:Connect(function() 
+    autoFarm = false 
+    xyz:Destroy() 
+end)
+
+local j = Instance.new("Frame")
+j.Parent = a
+j.Size = UDim2.new(0.85, 0, 0, 2)
+j.Position = UDim2.new(0.075, 0, 0, 50)
+j.BackgroundColor3 = Color3.fromRGB(150, 100, 255)
+j.BackgroundTransparency = 0.5
+
+local routeLabel = Instance.new("TextLabel")
+routeLabel.Parent = a
+routeLabel.Size = UDim2.new(0.35, 0, 0, 25)
+routeLabel.Position = UDim2.new(0.05, 0, 0, 58)
+routeLabel.BackgroundTransparency = 1
+routeLabel.Text = "📍 Маршрут:"
+routeLabel.TextColor3 = Color3.fromRGB(255, 200, 100)
+routeLabel.TextSize = 12
+routeLabel.Font = Enum.Font.GothamBold
+routeLabel.TextXAlignment = Enum.TextXAlignment.Left
+
+local RouteDropdown = Instance.new("TextButton")
+RouteDropdown.Parent = a
+RouteDropdown.Size = UDim2.new(0.50, 0, 0, 32)
+RouteDropdown.Position = UDim2.new(0.42, 0, 0, 55)
+RouteDropdown.BackgroundColor3 = Color3.fromRGB(30, 20, 60)
+RouteDropdown.BackgroundTransparency = 0.3
+RouteDropdown.BorderSizePixel = 2
+RouteDropdown.BorderColor3 = Color3.fromRGB(150, 100, 255)
+RouteDropdown.Text = currentRoute .. " ▼"
+RouteDropdown.TextColor3 = Color3.fromRGB(220, 210, 255)
+RouteDropdown.TextSize = 12
+RouteDropdown.Font = Enum.Font.GothamSemibold
+Instance.new("UICorner", RouteDropdown).CornerRadius = UDim.new(0, 8)
+
+local DropdownList = Instance.new("ScrollingFrame")
+DropdownList.Parent = a
+DropdownList.Size = UDim2.new(0.50, 0, 0, 100)
+DropdownList.Position = UDim2.new(0.42, 0, 0, 90)
+DropdownList.BackgroundColor3 = Color3.fromRGB(20, 15, 45)
+DropdownList.BackgroundTransparency = 0.1
+DropdownList.Visible = false
+DropdownList.ScrollBarThickness = 0
+DropdownList.CanvasSize = UDim2.new(0, 0, 0, 0)
+Instance.new("UICorner", DropdownList).CornerRadius = UDim.new(0, 8)
+
+local dropdownOpen = false
+RouteDropdown.MouseButton1Click:Connect(function()
+    dropdownOpen = not dropdownOpen
+    DropdownList.Visible = dropdownOpen
+    if dropdownOpen then
+        for _, child in pairs(DropdownList:GetChildren()) do
+            if child:IsA("TextButton") then child:Destroy() end
+        end
+        local y = 0
+        local sortedRoutes = {"+300m wins", "+500m wins", "+800m wins", "+1.25b wins", "+2b wins", "+3.5b wins", "+5.5b wins", "+8.5b wins", "+16b wins", "+25b wins"}
+        for _, route in ipairs(sortedRoutes) do
+            if Routes[route] then
+                local btn = Instance.new("TextButton")
+                btn.Parent = DropdownList
+                btn.BackgroundColor3 = Color3.fromRGB(25, 20, 50)
+                btn.Position = UDim2.new(0, 4, 0, y)
+                btn.Size = UDim2.new(1, -8, 0, 28)
+                btn.Font = Enum.Font.GothamSemibold
+                btn.Text = route
+                btn.TextColor3 = Color3.fromRGB(220, 210, 240)
+                btn.TextSize = 12
+                Instance.new("UICorner", btn).CornerRadius = UDim.new(0, 6)
+                btn.MouseButton1Click:Connect(function()
+                    currentRoute = route
+                    RouteDropdown.Text = route .. " ▼"
+                    DropdownList.Visible = false
+                    dropdownOpen = false
+                end)
+                y = y + 32
+            end
+        end
+        DropdownList.CanvasSize = UDim2.new(0, 0, 0, y + 5)
+    end
+end)
+
+-- Статус фарма
+local m = Instance.new("TextLabel")
+m.Parent = a
+m.Size = UDim2.new(0.45, -10, 0, 30)
+m.Position = UDim2.new(0.05, 0, 0, 200)
+m.BackgroundTransparency = 1
+m.Text = "⏸ Фарм остановлен"
+m.TextColor3 = Color3.fromRGB(255, 200, 100)
+m.TextSize = 14
+m.Font = Enum.Font.GothamBold
+m.TextXAlignment = Enum.TextXAlignment.Left
+
+-- Кнопка СТАРТ (под выпадающим списком, слева)
+local n = Instance.new("TextButton")
+n.Parent = a
+n.Size = UDim2.new(0, 110, 0, 34)
+n.Position = UDim2.new(0.55, 0, 0, 196)
+n.BackgroundColor3 = Color3.fromRGB(0, 200, 80)
+n.BorderSizePixel = 0
+n.Text = "▶ СТАРТ"
+n.TextColor3 = Color3.fromRGB(255, 255, 255)
+n.TextSize = 14
+n.Font = Enum.Font.GothamBold
+Instance.new("UICorner", n).CornerRadius = UDim.new(1, 0)
+
+n.MouseEnter:Connect(function() n.BackgroundTransparency = 0.2 end)
+n.MouseLeave:Connect(function() n.BackgroundTransparency = 0 end)
+
+local freezeInfo = Instance.new("TextLabel")
+freezeInfo.Parent = a
+freezeInfo.Size = UDim2.new(0.9, 0, 0, 35)
+freezeInfo.Position = UDim2.new(0.05, 0, 0, 225)
+freezeInfo.BackgroundTransparency = 1
+freezeInfo.Text = "@lumunaria"
+freezeInfo.TextColor3 = Color3.fromRGB(150, 180, 255)
+freezeInfo.TextSize = 10
+freezeInfo.Font = Enum.Font.Gotham
+freezeInfo.TextXAlignment = Enum.TextXAlignment.Left
+
+-- ===== ЛОГИКА ФАРМА =====
+local function SetNoClip(state)
+    if state then
+        if not noClipConnection then
+            noClipConnection = RunService.Stepped:Connect(function()
+                local char = LocalPlayer.Character
+                if char then
+                    for _, part in pairs(char:GetDescendants()) do
+                        if part:IsA("BasePart") and part.CanCollide then
+                            part.CanCollide = false
+                        end
+                    end
+                end
+            end)
+        end
+    else
+        if noClipConnection then
+            noClipConnection:Disconnect()
+            noClipConnection = nil
+        end
+        local char = LocalPlayer.Character
+        if char and char:FindFirstChild("HumanoidRootPart") then
+            char.HumanoidRootPart.CanCollide = true
+        end
+    end
+end
+
+local function FreezeCharacter()
+    local char = LocalPlayer.Character
+    if not char then return end
+    
+    local hrp = char:FindFirstChild("HumanoidRootPart")
+    local hum = char:FindFirstChildOfClass("Humanoid")
+    local torso = char:FindFirstChild("UpperTorso") or char:FindFirstChild("Torso")
+    
+    if hrp then
+        for _, v in pairs(hrp:GetChildren()) do
+            if v:IsA("BodyVelocity") or v:IsA("BodyPosition") or v:IsA("BodyGyro") or v:IsA("BodyThrust") then
+                v:Destroy()
+            end
+        end
+    end
+    
+    if torso then
+        for _, v in pairs(torso:GetChildren()) do
+            if v:IsA("BodyVelocity") or v:IsA("BodyPosition") or v:IsA("BodyGyro") or v:IsA("BodyThrust") then
+                v:Destroy()
+            end
+        end
+    end
+    
+    if hum then
+        hum.WalkSpeed = 0
+        hum.JumpPower = 0
+        hum.PlatformStand = true
+        hum.AutoRotate = false
+    end
+    
+    if hrp then
+        hrp.Anchored = true
+    end
+    
+    isFrozen = true
+end
+
+local function UnfreezeCharacter()
+    local char = LocalPlayer.Character
+    if not char then return end
+    
+    local hrp = char:FindFirstChild("HumanoidRootPart")
+    local hum = char:FindFirstChildOfClass("Humanoid")
+    
+    if hrp then
+        hrp.Anchored = false
+    end
+    
+    if hum then
+        hum.WalkSpeed = 16
+        hum.JumpPower = 50
+        hum.PlatformStand = false
+        hum.AutoRotate = true
+    end
+    
+    isFrozen = false
+end
+
+local function FlyTo(targetPos, isLast)
+    local char = LocalPlayer.Character
+    if not char or not char:FindFirstChild("HumanoidRootPart") then return false end
+    
+    local hrp = char.HumanoidRootPart
+    local bv = Instance.new("BodyVelocity")
+    bv.MaxForce = Vector3.new(9e9, 9e9, 9e9)
+    bv.Parent = hrp
+    
+    local reached = false
+    local attempts = 0
+    
+    while autoFarm and not reached and attempts < 400 do
+        if not char or not char:FindFirstChild("HumanoidRootPart") then break end
+        
+        local distance = (hrp.Position - targetPos).Magnitude
+        
+        if distance < 50 and distance > 10 and attempts > 10 then
+            local prevDistance = distance
+            task.wait(0.05)
+            local newDistance = (hrp.Position - targetPos).Magnitude
+            if newDistance > prevDistance then
+                hrp.CFrame = CFrame.new(targetPos)
+                reached = true
+                break
+            end
+        end
+        
+        if distance <= 6 then
+            reached = true
+            break
+        else
+            local direction = (targetPos - hrp.Position).Unit
+            bv.Velocity = direction * currentSpeed
+        end
+        
+        attempts = attempts + 1
+        task.wait(0.015)
+    end
+    
+    pcall(function() bv:Destroy() end)
+    
+    if reached and isLast then
+        hrp.CFrame = CFrame.new(targetPos)
+        task.wait(0.05)
+        FreezeCharacter()
+        task.wait(0.1)
+        UnfreezeCharacter()
+        return true
+    end
+    
+    if not reached and isLast then
+        hrp.CFrame = CFrame.new(targetPos)
+        task.wait(0.05)
+        FreezeCharacter()
+        task.wait(0.1)
+        UnfreezeCharacter()
+        return true
+    end
+    
+    return reached
+end
+
+local function DeleteObstacles()
+    local obs = {"LavaPart","Lava_Stage3","MovingWall","DoorWall1","GreenDoorKillPart",
+        "RedDoorKillPart","YellowDoorKillPart","DoorWall2","DoorWall3",
+        "Stage2LocalNPC_Local","Tumbleweed","vanilla","EyesLaser",
+        "Stage11LocalNPC_Local","Stage14LocalNPC_Local"}
+    for _, obj in pairs(workspace:GetDescendants()) do
+        if obj and obj.Parent then
+            for _, name in ipairs(obs) do
+                if obj.Name == name then pcall(function() obj:Destroy() end) break end
+            end
+            if obj.Name:match("^MovingWall%d+$") then pcall(function() obj:Destroy() end) end
+        end
+    end
+end
+
+local function StartFarm()
+    autoFarm = true
+    n.Text = "⏹ СТОП"
+    n.BackgroundColor3 = Color3.fromRGB(200, 50, 50)
+    m.Text = "🔄 Фарм запущен..."
+    m.TextColor3 = Color3.fromRGB(0, 255, 100)
+    
+    task.spawn(function()
+        while autoFarm do
+            local waypoints = Routes[currentRoute]
+            if not waypoints or #waypoints == 0 then break end
+            
+            SetNoClip(true)
+            
+            for i, point in ipairs(waypoints) do
+                if not autoFarm then break end
+                local isLast = (i == #waypoints)
+                FlyTo(point, isLast)
+            end
+            
+            task.wait(0.1)
+        end
+        
+        SetNoClip(false)
+        if isFrozen then
+            UnfreezeCharacter()
+        end
+        n.Text = "▶ СТАРТ"
+        n.BackgroundColor3 = Color3.fromRGB(0, 200, 80)
+        m.Text = "⏸ Фарм остановлен"
+        m.TextColor3 = Color3.fromRGB(255, 200, 100)
+    end)
+end
+
+n.MouseButton1Click:Connect(function()
+    if autoFarm then
+        autoFarm = false
+        n.Text = "▶ СТАРТ"
+        n.BackgroundColor3 = Color3.fromRGB(0, 200, 80)
+        m.Text = "⏸ Фарм остановлен"
+        m.TextColor3 = Color3.fromRGB(255, 200, 100)
+        SetNoClip(false)
+        if isFrozen then
+            UnfreezeCharacter()
+        end
+    else
+        StartFarm()
+    end
+end)
+
+DeleteObstacles()
+
+workspace.DescendantAdded:Connect(function(obj)
+    local obs = {"LavaPart","Lava_Stage3","MovingWall","DoorWall1","GreenDoorKillPart",
+        "RedDoorKillPart","YellowDoorKillPart","DoorWall2","DoorWall3",
+        "Stage2LocalNPC_Local","Tumbleweed","vanilla","EyesLaser",
+        "Stage11LocalNPC_Local","Stage14LocalNPC_Local"}
+    for _, name in ipairs(obs) do
+        if obj.Name == name then pcall(function() obj:Destroy() end) break end
+    end
+    if obj.Name:match("^MovingWall%d+$") then pcall(function() obj:Destroy() end) end
+end)
+
+print("✅ Мир 3 загружен!")
+print("📍 Маршруты: +300m, +500m, +800m, +1.25b, +2b, +3.5b, +5.5b, +8.5b, +16b, +25b")
